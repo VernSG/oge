@@ -1,0 +1,36 @@
+/* Custom Font: Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* @apply md:text-base lg:text-xl; */
+}
+
+@layer components {
+  .nav-a {
+    @apply m-4 block p-2 font-medium text-primary-100 after:block after:origin-left after:scale-x-0 after:border-b-2 after:border-primary-200 after:duration-200 after:ease-linear hover:text-primary-200 hover:after:scale-x-[0.25] md:mx-4 md:inline-block md:p-0 md:after:origin-center md:hover:after:scale-x-75 lg:mx-6;
+  }
+
+  .icon-nav {
+    @apply p-2 text-primary-100 hover:rounded-md hover:bg-primary-100 hover:text-primary-200;
+  }
+
+  .pauseAnimate {
+    animation-play-state: paused;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}

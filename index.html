@@ -1,0 +1,1832 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OGE CASE BONTANG</title>
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/styles/style.css" />
+
+    <!-- Alpine JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Call Alpine -->
+    <script src="./assets/javascript/alpine.js"></script>
+
+    <!-- Animate On Scroll -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+  <body class="overflow-x-hidden bg-white font-primary">
+    <!-- Start Components: Navbar -->
+    <nav
+      x-data
+      data-aos="fade-down"
+      data-aos-duration="1000"
+      class="fixed left-0 right-0 top-0 z-[999999999999999999] flex items-center justify-between bg-white p-6 shadow-sm md:py-4 lg:px-10"
+    >
+      <!-- Logo Here -->
+      <a href="#home-section" class="flex h-10 justify-center">
+        <img src="./assets/images/favicon.ico" alt="" />
+      </a>
+
+      <!-- Navigasi Here -->
+      <div
+        id="navMenu"
+        class="absolute -right-full top-full h-[100vh] w-[75%] bg-white duration-300 md:static md:h-max md:w-fit md:bg-transparent md:duration-0"
+      >
+        <a href="#home-section" class="nav-a">Beranda</a>
+        <a href="#about-section" class="nav-a">Tentang</a>
+        <a href="#menu-section" class="nav-a">Barang</a>
+        <a href="#review-section" class="nav-a">Review</a>
+        <a href="#contact-section" class="nav-a">Kontak</a>
+        <a href="login.php" class="nav-a">Login</a>
+      </div>
+
+      <!-- Extra Here -->
+      <div class="flex">
+        <button id="search-button" class="icon-nav">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+
+        <button id="shopping-cart-button" class="icon-nav relative">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M5.79166 2H1V4H4.2184L6.9872 16.6776H7V17H20V16.7519L22.1932 7.09095L22.5308 6H6.6552L6.08485 3.38852L5.79166 2ZM19.9869 8H7.092L8.62081 15H18.3978L19.9869 8Z"
+              fill="currentColor"
+            />
+            <path
+              d="M10 22C11.1046 22 12 21.1046 12 20C12 18.8954 11.1046 18 10 18C8.89543 18 8 18.8954 8 20C8 21.1046 8.89543 22 10 22Z"
+              fill="currentColor"
+            />
+            <path
+              d="M19 20C19 21.1046 18.1046 22 17 22C15.8954 22 15 21.1046 15 20C15 18.8954 15.8954 18 17 18C18.1046 18 19 18.8954 19 20Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span
+            x-text="$store.cart.totalQuantity"
+            x-show="$store.cart.totalQuantity"
+            class="absolute right-0 top-0 inline-block rounded-full bg-primary-200 px-1 text-xs text-white"
+          ></span>
+        </button>
+
+        <button id="hamburger-menu" class="icon-nav inline-block md:hidden">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2 6C2 5.44772 2.44772 5 3 5H21C21.5523 5 22 5.44772 22 6C22 6.55228 21.5523 7 21 7H3C2.44772 7 2 6.55228 2 6Z"
+              fill="currentColor"
+            />
+            <path
+              d="M2 12.0322C2 11.4799 2.44772 11.0322 3 11.0322H21C21.5523 11.0322 22 11.4799 22 12.0322C22 12.5845 21.5523 13.0322 21 13.0322H3C2.44772 13.0322 2 12.5845 2 12.0322Z"
+              fill="currentColor"
+            />
+            <path
+              d="M3 17.0645C2.44772 17.0645 2 17.5122 2 18.0645C2 18.6167 2.44772 19.0645 3 19.0645H21C21.5523 19.0645 22 18.6167 22 18.0645C22 17.5122 21.5523 17.0645 21 17.0645H3Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Search Form Here -->
+      <div
+        id="search-modal"
+        class="absolute right-0 mx-4 flex h-14 origin-right scale-x-0 items-center rounded-2xl bg-primary-100 drop-shadow-2xl duration-300 sm:w-1/2"
+      >
+        <input
+          type="search"
+          id="search-box"
+          placeholder="Cari Menu ..."
+          class="size-full rounded-2xl bg-primary-100 p-4 text-white focus:outline-none"
+        />
+        <label for="search-box" class="cursor-pointer pr-4">
+          <svg
+            class="size-6 text-white"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M18.319 14.4326C20.7628 11.2941 20.542 6.75347 17.6569 3.86829C14.5327 0.744098 9.46734 0.744098 6.34315 3.86829C3.21895 6.99249 3.21895 12.0578 6.34315 15.182C9.22833 18.0672 13.769 18.2879 16.9075 15.8442C16.921 15.8595 16.9351 15.8745 16.9497 15.8891L21.1924 20.1317C21.5829 20.5223 22.2161 20.5223 22.6066 20.1317C22.9971 19.7412 22.9971 19.1081 22.6066 18.7175L18.364 14.4749C18.3493 14.4603 18.3343 14.4462 18.319 14.4326ZM16.2426 5.28251C18.5858 7.62565 18.5858 11.4246 16.2426 13.7678C13.8995 16.1109 10.1005 16.1109 7.75736 13.7678C5.41421 11.4246 5.41421 7.62565 7.75736 5.28251C10.1005 2.93936 13.8995 2.93936 16.2426 5.28251Z"
+              fill="currentColor"
+            />
+          </svg>
+        </label>
+      </div>
+
+      <!-- Shooping Cart Here -->
+      <div
+        id="shopping-cart-modal"
+        class="absolute -right-full top-full h-screen max-h-screen w-[20rem] overflow-y-auto bg-white pb-96 duration-300"
+      >
+        <!-- Item -->
+        <template x-for="(item, index) in $store.cart.itemInCart" x-key="index">
+          <div
+            class="relative flex h-fit w-full flex-col items-center gap-4 border-b-2 bg-slate-100 p-3"
+          >
+            <!-- Teks & Image -->
+            <div class="relative flex w-full gap-3">
+              <p x-text="item.name" class="w-[75%] font-medium"></p>
+              <img
+                :src="`./assets/images/menu/${item.img}`"
+                :alt="item.name"
+                class="ml-auto size-16 rounded-lg"
+              />
+            </div>
+
+            <!-- Harga & Quantity -->
+            <div class="flex w-full flex-row items-center">
+              <p
+                x-text="toRupiah(item.totalItemPrice)"
+                class="text-primary-100"
+              ></p>
+              <!-- Plus Min -->
+              <div class="ml-auto flex items-center gap-3">
+                <!-- Minus -->
+                <button
+                  @click="$store.cart.removeItem(item.id)"
+                  class="size-8 text-primary-100"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ionicon"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    />
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                      d="M336 256H176"
+                    />
+                  </svg>
+                </button>
+
+                <!-- Quantity -->
+                <p x-text="item.quantity" class="text-primary-100"></p>
+
+                <!-- Add -->
+                <button
+                  @click="$store.cart.addItem(item)"
+                  class="size-8 text-primary-100"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ionicon"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    />
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                      d="M256 176v160M336 256H176"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </template>
+        <p
+          x-show="!$store.cart.itemInCart.length"
+          class="pt-[35vh] text-center text-lg font-semibold text-primary-100"
+        >
+          Keranjang Kosong :(
+        </p>
+        <p
+          x-show="$store.cart.itemInCart.length"
+          class="mx-auto mt-4 w-3/4 rounded-full border-2 border-dashed border-primary-100 py-2 text-center text-lg font-semibold text-primary-100"
+        >
+          Total: <span x-text="toRupiah($store.cart.totalPrice)"></span>
+        </p>
+      </div>
+    </nav>
+    <!-- End Components: Navbar -->
+
+    <!-- Start Components: Hero Section -->
+    <section id="home-section" class="h-[100vh]">
+      <!-- Container -->
+      <div
+        class="flex size-full flex-col items-center p-6 pt-[89px] md:flex-row"
+      >
+        <!-- Teks -->
+        <div
+          class="flex size-full flex-col justify-center pt-7 md:ml-8 md:w-1/2 md:pb-28"
+        >
+          <!-- Judul -->
+          <h1
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            class="text-4xl font-bold text-primary-100 drop-shadow-md sm:text-5xl"
+          >
+            Oge Case,
+          </h1>
+          <h1
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+            class="text-4xl font-bold text-primary-100 drop-shadow-md sm:text-5xl"
+          >
+            Case Berkualitas
+          </h1>
+
+          <!-- Paragraf -->
+          <p
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="400"
+            class="mt-4 text-lg font-medium drop-shadow-2xl md:max-w-[90%]"
+          >
+            Case & aksesoris lain yang berkualitas dan murah
+            Beli di Oge dijamin senang dan bahagia.
+          </p>
+
+          <!-- Button Menu -->
+          <a
+            data-aos="fade"
+            data-aos-duration="1000"
+            data-aos-delay="600"
+            href="#menu-section"
+            class="mt-4 inline-flex h-12 max-w-[20rem] items-center justify-center rounded-full bg-primary-100 px-5 text-lg font-medium text-white duration-500 hover:bg-primary-200 hover:text-primary-100 md:max-w-fit md:px-16"
+          >
+            Lihat Barang
+          </a>
+        </div>
+
+        <!-- Gambar -->
+        <div
+          data-aos="fade-left"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          class="relative flex size-full items-center justify-center p-[15%] md:w-1/2 md:p-[8%]"
+        >
+          <img
+            src="./assets/images/hero/leaf2.png"
+            alt=""
+            class="absolute left-6 top-9 z-20 size-12 animate-[bounce_7s_infinite] sm:size-16 md:left-0 md:top-24 md:size-20"
+          />
+          <img
+            src="./assets/images/hero/leaf.png"
+            alt=""
+            class="absolute bottom-9 left-6 z-20 size-8 animate-[bounce_3s_infinite] sm:size-11 md:bottom-20 md:left-16 md:size-16"
+          />
+          <img
+            src="./assets/images/hero/leaf.png"
+            alt=""
+            class="absolute bottom-9 z-20 size-0 animate-[bounce_15s_infinite] sm:-right-6 sm:-top-6 sm:size-32"
+          />
+
+          <!-- Roulete -->
+          <div
+            class="mx-auto items-center justify-center rounded-full bg-primary-100 shadow-lg"
+          >
+            <img
+              src="./assets/imageedit_1_6820944333.png"
+              alt=""
+              class="animate-[spin_25s_linear_infinite]"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Components: Hero Section -->
+
+    <!-- Start Components: About Section -->
+    <section id="about-section" class="mt-24 px-6 pb-16 pt-36 md:mt-0 lg:px-8">
+      <h1
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        class="mx-auto mb-12 text-center text-3xl font-bold text-primary-100 sm:text-5xl"
+      >
+        Cerita Kami
+      </h1>
+
+      <!-- Bagian Gambar -->
+      <div class="flex flex-col gap-6 sm:flex-row">
+        <div
+          data-aos="fade-right"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          class="relative flex-1 after:absolute after:left-0 after:top-0 after:block after:h-full after:w-[50%] after:bg-gradient-to-r after:from-white after:to-transparent"
+        >
+          <img
+            src="./assets/images/tg.png"
+            alt=""
+            class="h-[28rem] w-full rounded-3xl rounded-tl-3xl object-cover object-center"
+          />
+        </div>
+
+        <!-- Bagian Deskripsi -->
+        <div
+          data-aos="fade"
+          data-aos-duration="1000"
+          data-aos-delay="400"
+          class="flex-1 shrink-[35rem] sm:text-sm lg:text-lg"
+        >
+          <p class="mb-4">
+            OGE CASE bukan sekadar toko aksesoris handphone biasa. Kami hadir untuk
+            menghadirkan pengalaman baru di dunia aksesoris, khususnya di daerah Kota Bontang.
+            Kami ingin menawarkan pilihan aksesoris berkualitas dan layanan terbaik untuk semua
+            pelanggan kami, baik untuk keperluan pribadi maupun bisnis.
+          </p>
+          <p class="mb-4">
+            Desain OGE CASE didominasi oleh warna-warna cerah dan branding yang kuat,
+            menciptakan identitas yang berbeda dari toko aksesoris lainnya. Kami percaya bahwa
+            aksesoris handphone bukan hanya pelengkap, tetapi juga cara untuk mengekspresikan gaya dan kepribadian Anda.
+          </p>
+          <p class="mb-4">
+            Oge case adalah tempat case terbaik di bontang dengan barang yang kualitasnya
+            bukan main main. dan juga ada berbagai macam aksesoris yang dijual bukan hanya
+            case saja.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- End Components: About Section -->
+
+    <!-- Start Components: Why Us -->
+    <section class="px-6">
+      <h1
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        class="mx-auto my-12 max-w-xl rounded-full border-2 border-dotted border-primary-100 px-6 py-3 text-center text-lg font-bold text-primary-100 sm:text-3xl"
+      >
+        Kenapa memilih kami?
+      </h1>
+
+      <!-- Kelebihan -->
+      <div
+        class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-12"
+      >
+        <!-- Components 3 -->
+        <div
+          data-aos="fade"
+          data-aos-duration="1000"
+          data-aos-delay="600"
+          class="w-full"
+        >
+          <div
+            class="group mx-auto flex flex-col gap-2 rounded-3xl p-7 hover:shadow-lg"
+          >
+            <!-- Icon -->
+            <div
+              class="mx-auto mb-3 size-16 rounded-full bg-primary-100 p-3 text-white duration-300 group-hover:bg-primary-200 group-hover:text-primary-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                  d="M256 232v-80"
+                />
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="48"
+                  d="M256 88V72M132 132l-12-12"
+                />
+                <circle
+                  cx="256"
+                  cy="272"
+                  r="32"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-miterlimit="10"
+                  stroke-width="32"
+                />
+                <path
+                  d="M256 96a176 176 0 10176 176A176 176 0 00256 96z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-miterlimit="10"
+                  stroke-width="32"
+                />
+              </svg>
+            </div>
+
+            <!-- Teks -->
+            <h1 class="text-center text-lg font-medium text-primary-100">
+              Pelayanan Cepat
+            </h1>
+            <p class="text-center text-sm">
+              Hemat waktu.
+            </p>
+          </div>
+        </div>
+
+        <!-- Components 4 -->
+        <div
+          data-aos="fade"
+          data-aos-duration="1000"
+          data-aos-delay="800"
+          class="w-full"
+        >
+          <div
+            class="group mx-auto flex flex-col gap-2 rounded-3xl p-7 hover:shadow-lg"
+          >
+            <!-- Icon -->
+            <div
+              class="mx-auto mb-3 size-16 rounded-full bg-primary-100 p-3 text-white duration-300 group-hover:bg-primary-200 group-hover:text-primary-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <rect
+                  x="32"
+                  y="128"
+                  width="448"
+                  height="320"
+                  rx="48"
+                  ry="48"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                />
+                <path
+                  d="M144 128V96a32 32 0 0132-32h160a32 32 0 0132 32v32M480 240H32M320 240v24a8 8 0 01-8 8H200a8 8 0 01-8-8v-24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                />
+              </svg>
+            </div>
+
+            <!-- Teks -->
+            <h1 class="text-center text-lg font-medium text-primary-100">
+              Barang Berkualitas
+            </h1>
+            <p class="text-center text-sm">
+              Berisi barang berkualitas dan layak pakai.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Components: Why Us -->
+
+    <!-- Start Components: Menu Section -->
+    <section id="menu-section" class="pt-32">
+      <!-- Header Section -->
+      <div class="w-full px-6 pb-12">
+        <!-- Judul -->
+        <h1
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          class="mx-auto mb-7 pt-8 text-center text-3xl font-bold text-primary-100 sm:text-5xl"
+        >
+          Buku Barang
+        </h1>
+
+        <!-- Sub Judul -->
+        <div
+          data-aos="fade-right"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          class="mx-auto max-w-[25rem] rounded-full border-[1px] border-dashed border-secondary-100 px-7 py-4 sm:max-w-[35rem]"
+        >
+          <h1
+            class="w-full text-center text-xs font-medium text-secondary-100 sm:text-sm md:animate-[typing_3s_infinite_alternate] md:overflow-hidden md:whitespace-nowrap"
+          >
+            Barang favorite kamu yang mana nih?
+          </h1>
+        </div>
+      </div>
+
+      <!-- Daftar Menu & Kategori -->
+      <div class="w-full lg:flex lg:flex-row">
+        <!-- Kategori Selection -->
+        <div class="lg:w-[30%]">
+          <!-- Container -->
+          <div
+            data-aos="fade-right"
+            data-aos-duration="1000"
+            data-aos-delay="200"
+            class="relative w-full"
+          >
+            <div
+              id="stickySet"
+              class="left-0 right-0 top-[80px] z-30 lg:bottom-0 lg:right-2/3 lg:top-[120px] lg:tracking-widest"
+            >
+              <div class="mb-4 w-full px-6 pb-4 pt-3">
+                <!-- <p class="mb-1">Pilih Kategori :</p> -->
+                <!-- List Kategori -->
+                <ul
+                  class="no-scrollbar flex flex-row items-end overflow-auto whitespace-nowrap rounded-full bg-primary-100 px-6 py-4 lg:flex-col lg:gap-2 lg:rounded-none lg:bg-transparent"
+                >
+                  <!-- Best Seller Kategori -->
+                  <li
+                    class="group mr-4 rounded-l-full text-right duration-500 lg:px-7 lg:py-2 lg:hover:bg-primary-100"
+                  >
+                    <a
+                      href="#best-seller-cat"
+                      class="font-primary text-lg font-semibold text-white group-hover:text-primary-200 lg:text-2xl lg:text-primary-100"
+                      >Best Seller</a
+                    >
+                  </li>
+                  <!-- Main Course Kategori -->
+                  <li
+                    class="group mr-4 rounded-l-full text-right duration-500 lg:px-7 lg:py-2 lg:hover:bg-primary-100"
+                  >
+                    <a
+                      href="#main-course-cat"
+                      class="font-primary text-lg font-semibold text-white group-hover:text-primary-200 lg:text-2xl lg:text-primary-100"
+                      >Main Course</a
+                    >
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Container: List Menu -->
+        <div
+          data-aos="fade"
+          data-aos-duration="1000"
+          data-aos-delay="400"
+          id="listMenu"
+          x-data="menuItems"
+          class="w-full px-6 pb-60 pt-60 lg:ml-auto lg:max-w-[70%]"
+        >
+          <!-- Best Seller Menu -->
+          <div class="border-b-8 pb-10" id="best-seller-cat">
+            <!-- Judul Menu -->
+            <h1 class="pb-4 font-primary text-2xl font-bold">
+              BEST SELLER 
+            </h1>
+
+            <!-- Daftar Menu -->
+            <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+              <!-- Menu 1 -->
+              <template x-for="(item, index) in bestSeller" x-keys="index">
+                <div
+                  class="mx-auto w-full max-w-[23rem] rounded-xl bg-white drop-shadow-lg duration-300 hover:ring-2 hover:ring-primary-100"
+                >
+                  <!-- Pembagi Deskripsi dan CTA -->
+                  <div class="flex size-full flex-col gap-3 p-3">
+                    <!-- Pembagi Text dan Gambar -->
+                    <div class="flex w-full gap-3">
+                      <!-- Bagian Teks -->
+                      <div class="flex w-[60%] flex-col gap-4">
+                        <h1
+                          class="font-primary font-semibold text-primary-100 sm:text-lg"
+                          x-text="item.name"
+                        ></h1>
+                        <p
+                          x-text="item.desk"
+                          class="font-primary text-[0.8rem] font-light italic text-secondary-100 md:text-sm"
+                        ></p>
+                      </div>
+
+                      <!-- Bagian Gambar -->
+                      <div class="w-[35%]">
+                        <img
+                          :src="`./assets/images/menu/${item.img}`"
+                          :alt="`item.name`"
+                          class="rounded-lg"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Pembagi Harga & CTA -->
+                    <div class="mt-auto flex justify-between">
+                      <!-- Bagian Harga -->
+                      <p
+                        class="mt-auto text-sm font-medium text-primary-100 sm:text-base"
+                      >
+                        <span
+                          class="text-base sm:text-lg"
+                          x-text="toRupiah(item.price)"
+                        ></span>
+                      </p>
+
+                      <!-- Bagian Cart -->
+                      <a
+                        href="#"
+                        @click.prevent="$store.cart.addItem(item)"
+                        class="group flex items-center gap-1 rounded-full px-6 py-2 ring-1 ring-primary-100 duration-500 hover:bg-primary-100"
+                      >
+                        <p
+                          class="text-sm font-medium text-primary-100 group-hover:text-white sm:text-base"
+                        >
+                          Tambah
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <!-- Main Course Menu -->
+          <div class="border-b-8 py-10" id="main-course-cat">
+            <!-- Judul Menu -->
+            <h1 class="pb-4 font-primary text-2xl font-bold">MAIN COURSE</h1>
+
+            <!-- Daftar Menu -->
+            <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
+              <!-- Menu 1 -->
+              <div
+                class="mx-auto w-full max-w-[23rem] rounded-xl bg-white drop-shadow-lg duration-300 hover:ring-2 hover:ring-primary-100"
+              >
+                <!-- Pembagi Deskripsi dan CTA -->
+                <div class="flex size-full flex-col gap-3 p-3">
+                  <!-- Pembagi Text dan Gambar -->
+                  <div class="flex w-full gap-3">
+                    <!-- Bagian Teks -->
+                    <div class="flex w-[60%] flex-col gap-4">
+                      <h1 class="font-primary font-semibold sm:text-lg">
+                        Case
+                      </h1>
+                      <p
+                        class="font-primary text-[0.8rem] font-light italic text-secondary-100 md:text-sm"
+                      >
+                        Iphone & Android
+                      </p>
+                    </div>
+
+                    <!-- Bagian Gambar -->
+                    <div class="w-[35%]">
+                      <img
+                        src="./assets/images/case.png"
+                        alt=""
+                        class="rounded-lg"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Pembagi Harga & CTA -->
+                  <div class="mt-auto flex justify-between">
+                    <!-- Bagian Harga -->
+                    <p
+                      class="mt-auto text-sm font-medium text-primary-100 sm:text-base"
+                    >
+                      Rp.
+                      <span class="text-base sm:text-lg">25.000 - 65.000</span>
+                    </p>
+
+                    <!-- Bagian Cart -->
+                    <a
+                      href="#"
+                      class="group flex items-center gap-1 rounded-full px-6 py-2 ring-1 ring-primary-100 duration-500 hover:bg-primary-100"
+                    >
+                      <p
+                        class="text-sm font-medium text-primary-100 group-hover:text-white sm:text-base"
+                      >
+                        Tambah
+                      </p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Menu 2 -->
+              <div
+                class="mx-auto w-full max-w-[23rem] rounded-xl bg-white drop-shadow-lg duration-300 hover:ring-2 hover:ring-primary-100"
+              >
+                <!-- Pembagi Deskripsi dan CTA -->
+                <div class="flex size-full flex-col gap-3 p-3">
+                  <!-- Pembagi Text dan Gambar -->
+                  <div class="flex w-full gap-3">
+                    <!-- Bagian Teks -->
+                    <div class="flex w-[60%] flex-col gap-4">
+                      <h1 class="font-primary font-semibold sm:text-lg">
+                        Tempered Glass HP
+                      </h1>
+                      <p
+                        class="font-primary text-[0.8rem] font-light italic text-secondary-100 md:text-sm"
+                      >
+                        Android & Iphone (Motif)
+                      </p>
+                    </div>
+
+                    <!-- Bagian Gambar -->
+                    <div class="w-[35%]">
+                      <img
+                        src="./assets/images/Screenshot 2024-09-02 at 09-20-27 OGE CASE BONTANG (@ogecasebontang) • Instagram photos and videos.png"
+                        alt=""
+                        class="rounded-lg"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Pembagi Harga & CTA -->
+                  <div class="mt-auto flex justify-between">
+                    <!-- Bagian Harga -->
+                    <p
+                      class="mt-auto text-sm font-medium text-primary-100 sm:text-base"
+                    >
+                      Rp.
+                      <span class="text-base sm:text-lg">40.000 - 65.000</span>
+                    </p>
+
+                    <!-- Bagian Cart -->
+                    <a
+                      href="#"
+                      class="group flex items-center gap-1 rounded-full px-6 py-2 ring-1 ring-primary-100 duration-500 hover:bg-primary-100"
+                    >
+                      <p
+                        class="text-sm font-medium text-primary-100 group-hover:text-white sm:text-base"
+                      >
+                        Tambah
+                      </p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Menu 3 -->
+              <div
+                class="mx-auto w-full max-w-[23rem] rounded-xl bg-white drop-shadow-lg duration-300 hover:ring-2 hover:ring-primary-100"
+              >
+                <!-- Pembagi Deskripsi dan CTA -->
+                <div class="flex size-full flex-col gap-3 p-3">
+                  <!-- Pembagi Text dan Gambar -->
+                  <div class="flex w-full gap-3">
+                    <!-- Bagian Teks -->
+                    <div class="flex w-[60%] flex-col gap-4">
+                      <h1 class="font-primary font-semibold sm:text-lg">
+                        Charger
+                      </h1>
+                      <p
+                        class="font-primary text-[0.8rem] font-light italic text-secondary-100 md:text-sm"
+                      >
+                        Berbagai Charger HP (1 Set)
+                      </p>
+                    </div>
+
+                    <!-- Bagian Gambar -->
+                    <div class="w-[35%]">
+                      <img
+                        src="./assets/images/charger.png"
+                        alt=""
+                        class="rounded-lg"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Pembagi Harga & CTA -->
+                  <div class="mt-auto flex justify-between">
+                    <!-- Bagian Harga -->
+                    <p
+                      class="mt-auto text-sm font-medium text-primary-100 sm:text-base"
+                    >
+                      Rp.
+                      <span class="text-base sm:text-lg">45.000 - 65.000</span>
+                    </p>
+
+                    <!-- Bagian Cart -->
+                    <a
+                      href="#"
+                      class="group flex items-center gap-1 rounded-full px-6 py-2 ring-1 ring-primary-100 duration-500 hover:bg-primary-100"
+                    >
+                      <p
+                        class="text-sm font-medium text-primary-100 group-hover:text-white sm:text-base"
+                      >
+                        Tambah
+                      </p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Menu 4 -->
+              <div
+                class="mx-auto w-full max-w-[23rem] rounded-xl bg-white drop-shadow-lg duration-300 hover:ring-2 hover:ring-primary-100"
+              >
+                <!-- Pembagi Deskripsi dan CTA -->
+                <div class="flex size-full flex-col gap-3 p-3">
+                  <!-- Pembagi Text dan Gambar -->
+                  <div class="flex w-full gap-3">
+                    <!-- Bagian Teks -->
+                    <div class="flex w-[60%] flex-col gap-4">
+                      <h1 class="font-primary font-semibold sm:text-lg">
+                        Headset
+                      </h1>
+                      <p
+                        class="font-primary text-[0.8rem] font-light italic text-secondary-100 md:text-sm"
+                      >
+                        Berbagai Headset HP
+                      </p>
+                    </div>
+
+                    <!-- Bagian Gambar -->
+                    <div class="w-[35%]">
+                      <img
+                        src="./assets/images/headset.jpeg"
+                        alt=""
+                        class="rounded-lg"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Pembagi Harga & CTA -->
+                  <div class="mt-auto flex justify-between">
+                    <!-- Bagian Harga -->
+                    <p
+                      class="mt-auto text-sm font-medium text-primary-100 sm:text-base"
+                    >
+                      Rp.
+                      <span class="text-base sm:text-lg">15.000 - 45.000</span>
+                    </p>
+
+                    <!-- Bagian Cart -->
+                    <a
+                      href="#"
+                      class="group flex items-center gap-1 rounded-full px-6 py-2 ring-1 ring-primary-100 duration-500 hover:bg-primary-100"
+                    >
+                      <p
+                        class="text-sm font-medium text-primary-100 group-hover:text-white sm:text-base"
+                      >
+                        Tambah
+                      </p>
+                    </a>
+                  </div>
+                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Components: Menu Section -->
+
+    <!-- Start Components: Review Section -->
+    <section id="review-section" class="pb-32 pt-28">
+      <!-- Header Section -->
+      <div class="w-full px-6 pb-12">
+        <!-- Judul -->
+        <h1
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          class="mx-auto mb-7 pt-8 text-center text-3xl font-bold text-primary-100 sm:text-5xl"
+        >
+          Testimoni
+        </h1>
+
+        <!-- Sub Judul -->
+        <div
+          data-aos="fade"
+          data-aos-duration="1000"
+          data-aos-delay="400"
+          class="mx-auto max-w-[25rem] rounded-full border-[1px] border-dashed border-secondary-100 px-7 py-4 sm:max-w-[35rem]"
+        >
+          <h1
+            class="w-full text-center text-xs font-medium text-secondary-100 sm:text-sm md:animate-[typing_3s_infinite_alternate] md:overflow-hidden md:whitespace-nowrap"
+          >
+            Apa kata mereka? Kirim ulasanmu ke kontak kami :)
+          </h1>
+        </div>
+      </div>
+
+      <!-- Container Slider -->
+      <div
+        data-aos="fade"
+        data-aos-duration="1000"
+        data-aos-delay="600"
+        class="group relative overflow-hidden whitespace-nowrap bg-slate-100 py-14 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-[25%] before:bg-gradient-to-r before:from-white before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-[25%] after:bg-gradient-to-l after:from-white after:to-transparent"
+      >
+        <!-- Slider 1 -->
+        <div
+          class="group-hover:pauseAnimate inline-block animate-[slideReview_40s_linear_infinite]"
+        >
+          <!-- Reviewer 1 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/auliazulfa.png"
+                  alt=""
+                  class="rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Pelayanan di OGE sangat memuaskan. Saya membeli casing HP dan
+                tempered glass di sini, dan kualitasnya benar-benar bagus. Stafnya
+                juga ramah dan membantu saya memilih produk yang tepat. Pasti akan 
+                kembali lagi untuk kebutuhan aksesoris HP saya.
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Aulia Zulfa
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 2 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/miko.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Barang-barang di OGE sangat lengkap dan harganya terjangkau. Saya membeli charger untuk HP saya,
+                dan produk yang mereka jual sangat berkualitas. Sangat direkomendasikan!
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Miko Rudi
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 3 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/lulu.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Saya sangat puas berbelanja di OGE. Casing HP yang saya beli
+                memiliki desain yang keren dan tahan lama. Selain itu, tempered
+                glass-nya pas banget di layar HP saya. Pelayanan yang diberikan
+                sangat profesional dan cepat tanggap.
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Lulu Nur C.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 4 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/aldina.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                OGE adalah tempat yang tepat untuk mencari aksesoris HP. Saya membeli 
+                beberapa charger di sini, dan semuanya berfungsi dengan baik. Kualitas 
+                produknya sangat baik dan harganya pun bersahabat. Toko yang layak dipercaya
+                untuk kebutuhan HP Anda..
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Aldina E. A.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 5 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/akhyar.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Kemarin kesini buat beli case. Tempatnya rapi dan barang nya bagus
+                bangetttt, cocok buat kalian yang nyari case hp berkualitas dehh.
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Z. Akhyar
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider 2 -->
+        <div
+          class="group-hover:pauseAnimate inline-block animate-[slideReview_40s_linear_infinite]"
+        >
+          <!-- Reviewer 1 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/septi.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Tempered Glass nya juaraa!! padahal rame pembeli tetapi pelayanan
+                masih sangat cepat. Best 👍
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Septi Dwi K.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 2 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/fita.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Kemarin beli case iphone disini emang bagus banget sihh, 
+                apalagi yang bermotif harga terjangkau dan juga sesuai kualitasnya..
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                C. Fita
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 3 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/puji.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Setiap kali mudik selalu sempetin kesini, Case nya bagus" 
+                dan gak kalah sama yang lainnn cocok deh buat cari anti gores juga.
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Puji P.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 4 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/febr.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Worth to buy, pelayanan nomor satu, pengalaman pasang anti gores
+                disana juga cepet dan gak pake lamaa.
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Lulu F.
+              </p>
+            </div>
+          </div>
+
+          <!-- Reviewer 5 -->
+          <div class="inline-block h-[300px] w-[250px] whitespace-normal">
+            <div class="flex flex-col gap-2 p-4">
+              <!-- Bagian Image -->
+              <div class="mx-auto mb-4 size-16">
+                <img
+                  src="./assets/images/reviewer/dea.png"
+                  alt=""
+                  class="w-full rounded-full"
+                />
+              </div>
+
+              <!-- Icon Quote -->
+              <div class="mx-auto size-7 text-primary-100">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class=""
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    d="M87.48 380c1.2-4.38-1.43-10.47-3.94-14.86a42.63 42.63 0 00-2.54-3.8 199.81 199.81 0 01-33-110C47.64 139.09 140.72 48 255.82 48 356.2 48 440 117.54 459.57 209.85a199 199 0 014.43 41.64c0 112.41-89.49 204.93-204.59 204.93-18.31 0-43-4.6-56.47-8.37s-26.92-8.77-30.39-10.11a31.14 31.14 0 00-11.13-2.07 30.7 30.7 0 00-12.08 2.43L81.5 462.78a15.92 15.92 0 01-4.66 1.22 9.61 9.61 0 01-9.58-9.74 15.85 15.85 0 01.6-3.29z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                  <circle cx="160" cy="256" r="32" />
+                  <circle cx="256" cy="256" r="32" />
+                  <circle cx="352" cy="256" r="32" />
+                </svg>
+              </div>
+
+              <!-- Text Review -->
+              <p class="mb-4 w-full text-center text-xs md:text-sm">
+                Kemarin nyari charger disini juga tahan bantingg. emang bagus
+                baget sihh buat dibelii hehe makasih ogee :V.
+              </p>
+
+              <!-- Nama Reviewer -->
+              <p
+                class="mx-auto text-center font-primary text-lg font-semibold md:text-xl"
+              >
+                Dea F.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Components: Review Section -->
+
+    <!-- Start Components: Contact Section -->
+    <section id="contact-section" class="pb-24 pt-32">
+      <!-- Header Section -->
+      <div class="w-full px-6">
+        <!-- Judul -->
+        <h1
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          class="mx-auto mb-7 pt-8 text-center text-3xl font-bold text-primary-100 sm:text-5xl"
+        >
+          Hubungi Kami
+        </h1>
+
+        <!-- Sub Judul -->
+        <div
+          data-aos="fade-right"
+          data-aos-duration="1000"
+          data-aos-delay="200"
+          class="mx-auto max-w-[25rem] rounded-full border-[1px] border-dashed border-secondary-100 px-7 py-4 sm:max-w-[35rem]"
+        >
+          <h1
+            class="w-full text-center text-xs font-medium text-secondary-100 sm:text-sm md:animate-[typing_3s_infinite_alternate] md:overflow-hidden md:whitespace-nowrap"
+          >
+            Ada pertanyaan atau reservasi? Cukup tulis pesan kepada kami!
+          </h1>
+        </div>
+      </div>
+
+      <!-- Container -->
+      <div
+        data-aos="fade"
+        data-aos-duration="1000"
+        data-aos-delay="400"
+        class="w-full p-6"
+      >
+        <!-- Pembagi Send dan Informasi -->
+        <div class="flex flex-col gap-6 lg:mt-10 lg:flex-row">
+          <!-- Bagian Informasi -->
+          <div
+            class="mx-auto flex flex-wrap border-b-4 border-primary-100 pb-2 lg:min-w-[30%] lg:flex-col lg:items-center lg:justify-center lg:border-b-0 lg:border-r-4"
+          >
+            <!-- WhatsApp -->
+            <a
+              href="https://wa.me/+6287740341393"
+              target="_blank"
+              class="group mx-auto flex size-[200px] flex-col items-center justify-center rounded-3xl text-center duration-300 hover:bg-primary-200 hover:text-white sm:rounded-b-none lg:rounded-full"
+            >
+              <!-- Icon -->
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                class="size-10"
+                fill="currentColor"
+              >
+                <path
+                  d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+                />
+              </svg>
+
+              <!-- Text -->
+              <div class="text-primary-100 group-hover:text-white">
+                <h1 class="py-2 font-semibold">WhatsApp</h1>
+                <p class="text-sm">+62 822 502 009 08 </p>
+              </div>
+            </a>
+
+            <!-- Alamat -->
+            <a
+              href="https://maps.app.goo.gl/UAuTRtiwbLDPtGSJ6?g_st=ac"
+              target="_blank"
+              class="group mx-auto flex size-[200px] flex-col items-center justify-center rounded-3xl px-2 text-center duration-300 hover:bg-secondary-100 hover:text-white sm:rounded-b-none lg:rounded-full"
+            >
+              <!-- Icon -->
+              <svg
+                class="size-10"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M16.2721 10.2721C16.2721 12.4813 14.4813 14.2721 12.2721 14.2721C10.063 14.2721 8.27214 12.4813 8.27214 10.2721C8.27214 8.06298 10.063 6.27212 12.2721 6.27212C14.4813 6.27212 16.2721 8.06298 16.2721 10.2721ZM14.2721 10.2721C14.2721 11.3767 13.3767 12.2721 12.2721 12.2721C11.1676 12.2721 10.2721 11.3767 10.2721 10.2721C10.2721 9.16755 11.1676 8.27212 12.2721 8.27212C13.3767 8.27212 14.2721 9.16755 14.2721 10.2721Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.79417 16.5183C2.19424 13.0909 2.05438 7.39409 5.48178 3.79417C8.90918 0.194243 14.6059 0.054383 18.2059 3.48178C21.8058 6.90918 21.9457 12.6059 18.5183 16.2059L12.3124 22.7241L5.79417 16.5183ZM17.0698 14.8268L12.243 19.8965L7.17324 15.0698C4.3733 12.404 4.26452 7.97318 6.93028 5.17324C9.59603 2.3733 14.0268 2.26452 16.8268 4.93028C19.6267 7.59603 19.7355 12.0268 17.0698 14.8268Z"
+                  fill="currentColor"
+                />
+              </svg>
+
+              <!-- Text -->
+              <div class="text-primary-100 group-hover:text-white">
+                <h1 class="py-2 font-semibold">Alamat</h1>
+                <p class="text-sm">
+                  Jl. Selat Malaka Simpang 4 Lengkol
+                </p>
+              </div>
+            </a>
+
+            <!-- Instagram -->
+            <a
+              href="https://www.instagram.com/ogecasebontang/"
+              target="_blank"
+              class="group mx-auto flex size-[200px] flex-col items-center justify-center rounded-3xl text-center duration-300 hover:bg-[#DD2A7B] hover:text-white sm:rounded-b-none lg:rounded-full"
+            >
+              <!-- Icon -->
+              <svg
+                class="size-10"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7ZM9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"
+                  fill="currentColor"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5 1C2.79086 1 1 2.79086 1 5V19C1 21.2091 2.79086 23 5 23H19C21.2091 23 23 21.2091 23 19V5C23 2.79086 21.2091 1 19 1H5ZM19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+                  fill="currentColor"
+                />
+              </svg>
+
+              <!-- Text -->
+              <div class="text-primary-100 group-hover:text-white">
+                <h1 class="py-2 font-semibold">Instagram</h1>
+                <p class="text-sm">@ogecasebontang</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Bagian Send -->
+          <div class="mx-auto flex max-w-[50rem] flex-col lg:ml-10">
+            <!-- Teks -->
+            <div class="mb-4">
+              <h1 class="py-2 text-2xl font-bold text-primary-100 md:text-3xl">
+                Kirim Pesan
+              </h1>
+              <p class="text-sm text-primary-100 md:text-base">
+                Jika Anda mempunyai pertanyaan atau kekhawatiran, Anda dapat
+                menghubungi kami dengan mengisi formulir kontak, menelepon kami,
+                datang ke kantor kami, menemukan kami di jejaring sosial lain,
+                atau Anda dapat mengirim email pribadi kepada kami di:
+              </p>
+            </div>
+
+            <!-- Form -->
+            <form action="mailto:snexmania76@gmail.com" method="POST" enctype="text/plain">
+              <div class="grid gap-4">
+                <input
+                  placeholder="Nama Kamu. Contoh: Fellas"
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  class="h-8 w-full min-w-0 rounded-md bg-primary-100/10 px-4 py-6 text-sm md:text-base"
+                />
+                <input
+                  placeholder="Email Kamu. Contoh: hellofellas@gmail.com"
+                  type="email"
+                  id="your_email"
+                  name="your_email"
+                  class="h-8 w-full min-w-0 rounded-md bg-primary-100/10 px-4 py-6 text-sm md:text-base"
+                />
+                <input
+                  placeholder="Isi Subject."
+                  type="text"
+                  id="your_subject"
+                  name="your_subject"
+                  class="h-8 w-full min-w-0 rounded-md bg-primary-100/10 px-4 py-6 text-sm md:text-base"
+                />
+                <textarea
+                  placeholder="Isi Pesan."
+                  id="message"
+                  name="message"
+                  class="min-h-80 w-full min-w-0 resize-none rounded-md border-2 bg-primary-100/10 px-4 py-4 text-sm md:text-base"
+                ></textarea>
+                <button
+                  class="inline-flex h-12 max-w-[80%] items-center justify-center rounded-md bg-primary-100 px-8 text-lg font-medium text-white duration-500 hover:bg-primary-200 hover:text-primary-100 sm:max-w-[40%] md:px-12 lg:px-16"
+                >
+                  Kirim Pesan
+                </button>
+              </div>
+            </form>
+            
+
+        <!-- Bagian Maps -->
+        <div class=""></div>
+      </div>
+    </section>
+    <!-- End Components: Contact Section -->
+
+    <!-- Start Components: Footer Section -->
+    <footer class="flex items-end justify-end">
+      <div
+        class="relative flex min-h-[100px] w-full flex-col items-center justify-center bg-primary-100 px-12 py-5"
+      >
+        <!-- Waves -->
+        <div>
+          <div
+            class="absolute -top-[35%] bottom-0 left-0 z-50 h-[100px] w-full animate-[animateWaveL_4s_linear_infinite] bg-[url('/assets/images/wave.png')] bg-[length:1000px_100px] lg:-top-[45%]"
+          ></div>
+          <div
+            class="absolute -top-[35%] bottom-2 left-0 z-40 h-[100px] w-full animate-[animateWaveR_4s_linear_infinite] bg-[url('/assets/images/wave.png')] bg-[length:1000px_100px] opacity-50 lg:-top-[45%]"
+          ></div>
+          <div
+            class="absolute -top-[35%] bottom-4 left-0 z-50 h-[100px] w-full animate-[animateWaveL_3s_linear_infinite] bg-[url('/assets/images/wave.png')] bg-[length:1000px_100px] opacity-20 lg:-top-[45%]"
+          ></div>
+          <div
+            class="absolute -top-[35%] bottom-5 left-0 z-40 h-[100px] w-full animate-[animateWaveR_3s_linear_infinite] bg-[url('/assets/images/wave.png')] bg-[length:1000px_100px] opacity-70 lg:-top-[45%]"
+          ></div>
+        </div>
+
+        <!-- Social Icon -->
+        <ul
+          class="relative my-[10px] flex flex-wrap items-center justify-center"
+        >
+          <!-- WhatsApp -->
+          <li>
+            <a
+              href="https://wa.me/+6282250200908 "
+              target="_blank"
+              class="mx-[10px] inline-block text-white duration-500 hover:-translate-y-[10px] hover:text-primary-200"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-8"
+                fill="currentColor"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M414.73 97.1A222.14 222.14 0 00256.94 32C134 32 33.92 131.58 33.87 254a220.61 220.61 0 0029.78 111L32 480l118.25-30.87a223.63 223.63 0 00106.6 27h.09c122.93 0 223-99.59 223.06-222A220.18 220.18 0 00414.73 97.1zM256.94 438.66h-.08a185.75 185.75 0 01-94.36-25.72l-6.77-4-70.17 18.32 18.73-68.09-4.41-7A183.46 183.46 0 0171.53 254c0-101.73 83.21-184.5 185.48-184.5a185 185 0 01185.33 184.64c-.04 101.74-83.21 184.52-185.4 184.52zm101.69-138.19c-5.57-2.78-33-16.2-38.08-18.05s-8.83-2.78-12.54 2.78-14.4 18-17.65 21.75-6.5 4.16-12.07 1.38-23.54-8.63-44.83-27.53c-16.57-14.71-27.75-32.87-31-38.42s-.35-8.56 2.44-11.32c2.51-2.49 5.57-6.48 8.36-9.72s3.72-5.56 5.57-9.26.93-6.94-.46-9.71-12.54-30.08-17.18-41.19c-4.53-10.82-9.12-9.35-12.54-9.52-3.25-.16-7-.2-10.69-.2a20.53 20.53 0 00-14.86 6.94c-5.11 5.56-19.51 19-19.51 46.28s20 53.68 22.76 57.38 39.3 59.73 95.21 83.76a323.11 323.11 0 0031.78 11.68c13.35 4.22 25.5 3.63 35.1 2.2 10.71-1.59 33-13.42 37.63-26.38s4.64-24.06 3.25-26.37-5.11-3.71-10.69-6.48z"
+                  fill-rule="currentColor"
+                />
+              </svg>
+            </a>
+          </li>
+
+          <!-- Instagram -->
+          <li>
+            <a
+              href="https://www.instagram.com/ogecasebontang/"
+              target="_blank"
+              class="mx-[10px] inline-block text-white duration-500 hover:-translate-y-[10px] hover:text-[#DD2A7B]"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-8"
+                fill="currentColor"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M349.33 69.33a93.62 93.62 0 0193.34 93.34v186.66a93.62 93.62 0 01-93.34 93.34H162.67a93.62 93.62 0 01-93.34-93.34V162.67a93.62 93.62 0 0193.34-93.34h186.66m0-37.33H162.67C90.8 32 32 90.8 32 162.67v186.66C32 421.2 90.8 480 162.67 480h186.66C421.2 480 480 421.2 480 349.33V162.67C480 90.8 421.2 32 349.33 32z"
+                  fill-rule="currentColor"
+                />
+                <path
+                  d="M377.33 162.67a28 28 0 1128-28 27.94 27.94 0 01-28 28zM256 181.33A74.67 74.67 0 11181.33 256 74.75 74.75 0 01256 181.33m0-37.33a112 112 0 10112 112 112 112 0 00-112-112z"
+                  fill-rule="currentColor"
+                />
+              </svg>
+            </a>
+          </li>
+
+          <!-- TikTok -->
+          <li>
+            <a
+              href="https://www.tiktok.com/"
+              target="_blank"
+              class="mx-[10px] inline-block text-white duration-500 hover:-translate-y-[10px] hover:text-slate-900"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-8"
+                fill="currentColor"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M412.19 118.66a109.27 109.27 0 01-9.45-5.5 132.87 132.87 0 01-24.27-20.62c-18.1-20.71-24.86-41.72-27.35-56.43h.1C349.14 23.9 350 16 350.13 16h-82.44v318.78c0 4.28 0 8.51-.18 12.69 0 .52-.05 1-.08 1.56 0 .23 0 .47-.05.71v.18a70 70 0 01-35.22 55.56 68.8 68.8 0 01-34.11 9c-38.41 0-69.54-31.32-69.54-70s31.13-70 69.54-70a68.9 68.9 0 0121.41 3.39l.1-83.94a153.14 153.14 0 00-118 34.52 161.79 161.79 0 00-35.3 43.53c-3.48 6-16.61 30.11-18.2 69.24-1 22.21 5.67 45.22 8.85 54.73v.2c2 5.6 9.75 24.71 22.38 40.82A167.53 167.53 0 00115 470.66v-.2l.2.2c39.91 27.12 84.16 25.34 84.16 25.34 7.66-.31 33.32 0 62.46-13.81 32.32-15.31 50.72-38.12 50.72-38.12a158.46 158.46 0 0027.64-45.93c7.46-19.61 9.95-43.13 9.95-52.53V176.49c1 .6 14.32 9.41 14.32 9.41s19.19 12.3 49.13 20.31c21.48 5.7 50.42 6.9 50.42 6.9v-81.84c-10.14 1.1-30.73-2.1-51.81-12.61z"
+                  fill-rule="currentColor"
+                />
+              </svg>
+            </a>
+          </li>
+
+          <!-- Location -->
+          <li>
+            <a
+              href="https://maps.app.goo.gl/UAuTRtiwbLDPtGSJ6?g_st=ac"
+              class="mx-[10px] inline-block text-white duration-500 hover:-translate-y-[10px] hover:text-red-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-9"
+                fill="currentColor"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M336.76 161l-186.53 82.35c-10.47 4.8-6.95 20.67 4.57 20.67H244a4 4 0 014 4v89.18c0 11.52 16 15 20.78 4.56L351 175.24A10.73 10.73 0 00336.76 161z"
+                />
+                <path
+                  d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-miterlimit="10"
+                  stroke-width="32"
+                />
+              </svg>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Menu -->
+        <ul
+          class="relative my-[10px] grid grid-cols-2 items-center justify-center gap-x-7 gap-y-2 sm:grid-cols-3 md:grid-cols-5"
+        >
+          <li class="md:mx-auto">
+            <a
+              href="#home-section"
+              class="mx-auto inline-block text-center text-white hover:opacity-50"
+              >Beranda</a
+            >
+          </li>
+          <li class="md:mx-auto">
+            <a
+              href="#about-section"
+              class="mx-auto inline-block text-center text-white hover:opacity-50"
+              >Tentang</a
+            >
+          </li>
+          <li class="md:mx-auto">
+            <a
+              href="#menu-section"
+              class="mx-auto inline-block text-center text-white hover:opacity-50"
+              >Menu</a
+            >
+          </li>
+          <li class="md:mx-auto">
+            <a
+              href="#review-section"
+              class="mx-auto inline-block text-center text-white hover:opacity-50"
+              >Review</a
+            >
+          </li>
+          <li class="md:mx-auto">
+            <a
+              href="#contact-section"
+              class="mx-auto inline-block text-center text-white hover:opacity-50"
+              >Contact</a
+            >
+          </li>
+        </ul>
+
+        <!-- Copyright -->
+        <p class="mb-[10px] mt-4 text-center text-xs text-white md:text-sm">
+          Copyright ©2024 | All Rights Reserved.
+        </p>
+      </div>
+    </footer>
+    <!-- End Components: Footer Section -->
+
+    <!-- JavaScript -->
+    <script src="./assets/javascript/script.js"></script>
+
+    <!-- Animate On Scroll -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>
