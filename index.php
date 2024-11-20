@@ -4,7 +4,7 @@ session_start();
 
 // Jika pengguna belum login, arahkan ke login.php
 if(empty($_SESSION['admin'])){
-    header('Location: index.html');
+    header('Location: login.php');
     exit;
 }
 
